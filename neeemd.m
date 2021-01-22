@@ -15,7 +15,7 @@ siz = length(y);
 modes = zeros(siz,num_IMF);
 res = zeros(siz,1);
 for k = 1:NR
-    disp(['Ensemble number #' num2str(k)]);
+    %disp(['Ensemble number #' num2str(k)]);
 
     Nstd = (NstdMax-NstdMin).*rand(1,1) + NstdMin; % Generating random std of white noise
     
