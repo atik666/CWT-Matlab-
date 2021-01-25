@@ -2,15 +2,15 @@ clear;clc;
 
 fs= 12000; %Sampling frequency
 normal = load ('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\Normal Baseline Data\97.mat');
-inner = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Inner Race\0.007\105.mat');
-outer = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Outer Race\0.007\130.mat');
-ball = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Ball\0.007\118.mat');
+inner = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Inner Race\0.007\108.mat');
+outer = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Outer Race\0.007\133.mat');
+ball = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Ball\0.007\121.mat');
 
-normal = normal.X097_DE_time; inner = inner.X105_DE_time; 
-outer = outer.X130_DE_time; ball = ball.X118_DE_time; 
+normal = normal.X097_DE_time; inner = inner.X108_DE_time; 
+outer = outer.X133_DE_time; ball = ball.X121_DE_time; 
 
 fault = 'normal';
-hp = 0;
+hp = 3;
 dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/6464/Contour/%s/%d',fault,hp);
 
 k = 1;
