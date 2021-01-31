@@ -1,7 +1,4 @@
 import numpy as np
-import math
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing mat data file
@@ -18,11 +15,9 @@ from PyLMD import LMD
 lmd = LMD(max_num_pf = 1) # Specify number of PFs you want
 
 def lmdFun(data):
-    L = 200 # Number of samples
-    ensem = 100 # Number of ensembles
+    L = 10 # Number of samples
+    ensem = 10 # Number of ensembles
     k = 0  
-    PFs = []
-    noise = []
     allPFs = [[0 for x in range(ensem)] for y in range(L)] # Initiating nested list of PFs
     allNoise = [[0 for x in range(ensem)] for y in range(L)] # Initiating nested list of noise
     
@@ -55,9 +50,10 @@ def lmdFun(data):
     FPFs = sumPFs - sumNoise # Final PFs
     return FPFs # Final value from NEELMD
 
-dePF = lmdFun(dataDE)
-fePF = lmdFun(dataFE)
+dePF = lmdFun(dataDE) # NEELMD of DE channel
+fePF = lmdFun(dataFE) # NEELMD of DE channel
 
+# Saving to excel
 writer = pd.ExcelWriter('D:\OneDrive - ump.edu.my\Atik_Home\Writing\WCNN\Code\dataLMD\%d.xlsx' %file, engine='xlsxwriter')
 pd.DataFrame(dePF).to_excel(writer, sheet_name='DE', header= False, index = False)
 pd.DataFrame(fePF).to_excel(writer, sheet_name='FE', header= False, index = False)
