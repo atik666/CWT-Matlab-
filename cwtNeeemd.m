@@ -1,24 +1,24 @@
 clear;clc;
 
 fs= 12000; %Sampling frequency
-normal = load ('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\Normal Baseline Data\99.mat');
-inner = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Inner Race\0.021\209.mat');
-outer = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Outer Race\0.021\234.mat');
-ball = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Ball\0.021\222.mat');
+normal = load ('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\Normal Baseline Data\100.mat');
+inner = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Inner Race\0.007\108.mat');
+outer = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Outer Race\0.007\133.mat');
+ball = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Ball\0.007\121.mat');
 
-normal = normal.X099_DE_time; inner = inner.X209_DE_time; 
-outer = outer.X234_DE_time; ball = ball.X222_DE_time; 
+normal = normal.X100_FE_time; inner = inner.X108_FE_time; 
+outer = outer.X133_FE_time; ball = ball.X121_FE_time; 
 
-fault = 'ball';
-hp = 0;
-dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/cwtNeeemd/Severity/0.021/%s/%d',fault,hp);
+fault = 'normal';
+hp = 3;
+dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/cwtNeeemd/Load/%s/FE/%d',fault,hp);
 
 num_IMF = 1; NR = 100; NstdMax = 0.2; NstdMin = 0.1;
 
 k = 1;
 for i = 1 : 200
     
-y = ball(k:k+599, :);
+y = normal(k:k+599, :);
 y = neeemd(y, num_IMF, NR, NstdMax, NstdMin)';
 
 [wt,f] = cwt(y,'amor',fs);

@@ -1,25 +1,19 @@
 clear; clc;
 
-rub = load ('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Blade Data\data_20150516_20hz\r1r2r3_20hz_16.mat');
-rub = rub.Channel_003;
-loss = load ('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Blade Data\data_20150516_20hz\l1l2l3_20hz_16.mat');
-loss = loss.Channel_003;
-twist = load ('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Blade Data\data_20150516_20hz\t1t2t3_20hz_16.mat');
-twist = twist.Channel_003;
 base = load ('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Blade Data\data_20150516_20hz\b4_20hz_16.mat');
-base = base.Channel_003;
+base = base.Channel_004;
 
-fault = 'twist';
+fault = 'base';
 hz = 20;
 channel = 4;
-dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Blade/%s/%d/%d',fault,hz,channel);
+dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Blade/%s/%d/b4/%d',fault,hz,channel);
 
 num_IMF = 1; NR = 100; NstdMax = 0.2; NstdMin = 0.1; fs = 5000;
 
 k = 1;
 for i = 1 : 400
 
-y = twist(k:k+499, :);
+y = base(k:k+499, :);
 y = neeemd(y, num_IMF, NR, NstdMax, NstdMin)';
 
 [wt,f] = cwt(y,'amor',fs);
