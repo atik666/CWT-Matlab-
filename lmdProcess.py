@@ -1,10 +1,12 @@
+from IPython import get_ipython;   
+get_ipython().magic('reset -sf')
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 # Importing mat data file
 from scipy.io import loadmat
-file = 108 # File name
-data = loadmat(r'D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Inner Race\0.007\%d.mat' %file)
+file = 132 # File name
+data = loadmat(r'D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Outer Race\0.007\%d.mat' %file)
 
 # Coverting the data file to 1-D
 dataDE = np.ravel(data["X%d_DE_time" %file]) # DE channel
@@ -14,9 +16,7 @@ dataFE = np.ravel(data["X%d_FE_time" %file]) # FE channel
 from PyLMD import LMD
 lmd = LMD(max_num_pf = 1) # Specify number of PFs you want
 
-def neeLMD(data):
-    L = 100 # Number of samples
-    ensem = 100 # Number of ensembles
+def neeLMD(data, L = 100, ensem = 100): # Number of samples, ensembles
     k = 0  
     allPFs = [[0 for x in range(ensem)] for y in range(L)] # Initiating nested list of PFs
     allNoise = [[0 for x in range(ensem)] for y in range(L)] # Initiating nested list of noise
@@ -38,7 +38,7 @@ def neeLMD(data):
             x = x - np.std(x)
             
             wn = x * Nstd # White noise
-            y1 = y + wn # Signal +_white noise
+            y1 = y + wn # Signal + white noise
             PF = lmd.lmd((y1[0]))[0] # PFs of signal plus white noise
             nPF = lmd.lmd((wn[0]))[0] # PFs of white noise
             allPFs[i][j] = (PF[0]) # list of all ensemble PFs
