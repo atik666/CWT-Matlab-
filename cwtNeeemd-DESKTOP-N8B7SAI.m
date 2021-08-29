@@ -6,20 +6,20 @@ inner = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\
 outer = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Outer Race\0.007\133.mat');
 ball = load('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Ball\0.007\121.mat');
 
-normal = normal.X100_FE_time; inner = inner.X108_FE_time; 
-outer = outer.X133_FE_time; ball = ball.X121_FE_time; 
+normal = normal.X100_DE_time; inner = inner.X108_DE_time; 
+outer = outer.X133_DE_time; ball = ball.X121_DE_time; 
 
-fault = 'normal';
+fault = 'ball';
 hp = 3;
-dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Bearing/NEEEMD/Load/%s/FE/%d',fault,hp);
+dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Bearing/CEEMD/%s/%d',fault,hp);
 
 num_IMF = 5; NR = 100; NstdMax = 0.2; NstdMin = 0.1;
 
 k = 1;
-for i = 1 : 200
-    
-y = normal(k:k+599, :);
-y = neeemd(y, num_IMF, NR, NstdMax, NstdMin)';
+for i = 1 : 50
+y = ball(k:k+599, :);
+y = ceemd(y', num_IMF, NR, NstdMax, NstdMin);
+y = reshape(y,1,[]);
 
 [wt,f] = cwt(y,'amor',fs);
 h = figure('Visible', 'off');

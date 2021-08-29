@@ -1,19 +1,18 @@
 clear; clc;
 
-data = 'b4';
-base = load(sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Data Files/Blade Data/data_20150516_20hz/%s_20hz_16.mat',data));
+base = load ('D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Blade Data\data_20150516_20hz\b4_20hz_16.mat');
 base = base.Channel_003;
 
 fault = 'base';
-hz = 16;
-dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Blade/CEEMD/%s/%d/%s',fault,hz,data);
+hz = 17;
+dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Blade/neeemd/%s/%d/b1/%d',fault,hz);
 
 num_IMF = 5; NR = 100; NstdMax = 0.2; NstdMin = 0.1; fs = 5000;
 
-k = 1;
-for i = 1 : 400
+k = 1; 
+for i = 1 : 75
 y = base(k:k+499, :);
-y = ceemd(y', num_IMF, NR, NstdMax, NstdMin);
+y = neeemd(y, num_IMF, NR, NstdMax, NstdMin);
 y = reshape(y,1,[]);
 
 [wt,f] = cwt(y,'amor',fs);

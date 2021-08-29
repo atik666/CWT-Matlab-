@@ -1,11 +1,11 @@
 clc; clear;
 fs= 12000; %Sampling frequency
 
-type = 'FE'; load = 3; fault = 'normal';
+type = 'FE'; load = 2; fault = 'outer'; 
 source = 'D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Code/dataLMD';
 dir = sprintf('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Bearing/NEELMD/%s/%s/%d',fault,type,load);
 
-data = xlsread('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Code/dataLMD/100.xlsx',type);
+data = xlsread('D:/OneDrive - ump.edu.my/Atik_Home/Writing/WCNN/Code/dataLMD/132.xlsx',type);
 
 for i = 1 : 200
     y = data(i, 1:end)';

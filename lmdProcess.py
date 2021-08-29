@@ -5,7 +5,7 @@ import pandas as pd
 from tqdm import tqdm
 # Importing mat data file
 from scipy.io import loadmat
-file = 132 # File name
+file = 133 # File name
 data = loadmat(r'D:\OneDrive - ump.edu.my\Atik_Home\Data Files\Bearing Data Center\12K Drive End Bearing Fault Data\Outer Race\0.007\%d.mat' %file)
 
 # Coverting the data file to 1-D
@@ -17,7 +17,7 @@ from PyLMD import LMD
 lmd = LMD(max_num_pf = 1) # Specify number of PFs you want
 
 def neeLMD(data, L = 100, ensem = 100): # Number of samples, ensembles
-    k = 0  
+    k = 6001  
     allPFs = [[0 for x in range(ensem)] for y in range(L)] # Initiating nested list of PFs
     allNoise = [[0 for x in range(ensem)] for y in range(L)] # Initiating nested list of noise
     
@@ -54,7 +54,7 @@ dePF = neeLMD(dataDE) # NEELMD of DE channel
 fePF = neeLMD(dataFE) # NEELMD of DE channel
 
 # Saving to excel
-writer = pd.ExcelWriter('D:\OneDrive - ump.edu.my\Atik_Home\Writing\WCNN\Code\dataLMD\%d.xlsx' %file, engine='xlsxwriter')
+writer = pd.ExcelWriter('D:\OneDrive - ump.edu.my\Atik_Home\Writing\WCNN\Code\dataLMD\%dx.xlsx' %file, engine='xlsxwriter')
 pd.DataFrame(dePF).to_excel(writer, sheet_name='DE', header= False, index = False)
 pd.DataFrame(fePF).to_excel(writer, sheet_name='FE', header= False, index = False)
 writer.save()
